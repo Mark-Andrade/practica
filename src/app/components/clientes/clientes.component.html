@@ -1,0 +1,83 @@
+<app-nabvar></app-nabvar>
+<div class="container main-container">
+    <h3 class="text-center">Listado de cuentas de clientes</h3>
+    <div class="text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalcliente">
+      Alta cliente
+    </button>
+    </div>
+    <div class="modal fade" id="modalcliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Dar de alta un nuevo cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="text-center" style="color: #757575;" [formGroup]="formcliente" (ngSubmit)="guardarcliente()" autocomplete="off">
+                    <div class="modal-body">
+                        <div class="md-form">
+                            <input type="text" class="form-control" maxlength="40" formControlName="idcliente">
+                            <label>Id cliente</label>
+                            <small *ngIf="isSubmitted && errorControl.idcliente.errors?.required" class=" text-danger ">El id cliente es requerido</small>
+                        </div>
+                        <div class="md-form ">
+                            <input type="text" class="form-control" maxlength="40" formControlName="nombrecompleto">
+                            <label>Nombre completo</label>
+                            <small class=" text-danger" *ngIf="isSubmitted && errorControl.nombrecompleto.errors?.required">El nombre es requerido
+                            </small>
+                        </div>
+                        <div class="md-form ">
+                            <input type="text" class="form-control" maxlength="20" formControlName="direccion">
+                            <label>Dirección</label>
+                            <small class=" text-danger" *ngIf="isSubmitted && errorControl.direccion.errors?.required">La dirección es requerida
+                            </small>
+                        </div>
+                        <div class="md-form ">
+                            <input type="number" class="form-control" maxlength="20" formControlName="edad">
+                            <label>Edad</label>
+                            <small class=" text-danger" *ngIf="isSubmitted && errorControl.edad.errors?.required">La edad es requerida
+                            </small>
+                        </div>
+                        <div class="md-form ">
+                            <select class="browser-default custom-select" formControlName="genero">
+                                <option value="" disabled selected>Elige el genero</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                              </select>
+                            <small class=" text-danger" *ngIf="isSubmitted && errorControl.genero.errors?.required">El genero es requerido
+                            </small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Número de identificación</th>
+                <th scope="col">Nombre completo</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Genero</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let datoscliente of datosclientes; let i = index">
+                <th scope="row ">{{ i + 1 }}</th>
+                <td>{{ datoscliente.idcliente }}</td>
+                <td>{{ datoscliente.nombrecompleto }}</td>
+                <td>{{ datoscliente.direccion }}</td>
+                <td>{{ datoscliente.edad }}</td>
+                <td>{{ datoscliente.genero }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

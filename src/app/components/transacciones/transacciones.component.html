@@ -1,0 +1,115 @@
+<app-nabvar></app-nabvar>
+
+<div class="container main-container">
+    <h3 class="text-center">Listado de transacciones</h3>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaldeposito">Depósito</button>&nbsp;
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalretiro">Retiro</button>
+    </div>
+    <div class="modal fade" id="modaldeposito" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Realizar depósito</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="text-center" style="color: #757575;" [formGroup]="formdeposito" (ngSubmit)="guardardeposito()" autocomplete="off">
+                    <div class="modal-body">
+                        <div class="md-form">
+                            <input type="text" class="form-control" maxlength="40" formControlName="numeroCuenta">
+                            <label>Numero de cuenta</label>
+                            <small *ngIf="isSubmitted && errorControl.numeroCuenta.errors?.required" class=" text-danger ">El numero de cuenta es requerido</small>
+                        </div>
+                        <div class="md-form ">
+                            <input type="text" class="form-control" maxlength="20" formControlName="monto">
+                            <label>Monto</label>
+                            <small class=" text-danger" *ngIf="isSubmitted && errorControl.monto.errors?.required">El monto es requerido
+                            </small>
+                        </div>
+                        <div class="md-form ">
+                            <input type="text" class="form-control" maxlength="20" formControlName="usuario">
+                            <label>Usuario</label>
+                            <small class=" text-danger" *ngIf="isSubmitted && errorControl.usuario.errors?.required">El usuario es requerido
+                            </small>
+                        </div>
+                        <div class="md-form ">
+                            <input type="text" class="form-control" maxlength="20" formControlName="terminal">
+                            <label>Terminal</label>
+                            <small class=" text-danger" *ngIf="isSubmitted && errorControl.terminal.errors?.required">La terminal es requerida
+                            </small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalretiro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Realizar retiro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="text-center" style="color: #757575;" [formGroup]="formretiro" (ngSubmit)="guardarretiro()" autocomplete="off">
+                    <div class="modal-body">
+                        <div class="md-form">
+                            <input type="text" class="form-control" maxlength="40" formControlName="numeroCuenta">
+                            <label>Numero de cuenta</label>
+                            <small *ngIf="isSubmittedretiro && errorControlretiro.numeroCuenta.errors?.required" class=" text-danger ">El numero de cuenta es requerido</small>
+                        </div>
+                        <div class="md-form ">
+                            <input type="text" class="form-control" maxlength="20" formControlName="monto">
+                            <label>Monto</label>
+                            <small class=" text-danger" *ngIf="isSubmittedretiro && errorControlretiro.monto.errors?.required">El monto es requerido
+                            </small>
+                        </div>
+                        <div class="md-form ">
+                            <input type="text" class="form-control" maxlength="20" formControlName="usuario">
+                            <label>Usuario</label>
+                            <small class=" text-danger" *ngIf="isSubmittedretiro && errorControlretiro.usuario.errors?.required">El usuario es requerido
+                            </small>
+                        </div>
+                        <div class="md-form ">
+                            <input type="text" class="form-control" maxlength="20" formControlName="terminal">
+                            <label>Terminal</label>
+                            <small class=" text-danger" *ngIf="isSubmittedretiro && errorControlretiro.terminal.errors?.required">La terminal es requerida
+                            </small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Numero de cuenta</th>
+                <th scope="col">Monto</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Ultima Actualización</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let datostransaccion of datostransacciones; let i= index ">
+                <th scope="row ">{{i+1}}</th>
+                <td>{{datostransaccion.numeroCuenta}}</td>
+                <td>{{datostransaccion.monto}}</td>
+                <td>{{datostransaccion.tipo}}</td>
+                <td>{{datostransaccion.fechaUltimaAct}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

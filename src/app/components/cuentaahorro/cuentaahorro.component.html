@@ -1,0 +1,68 @@
+<app-nabvar></app-nabvar>
+
+<div class="container main-container">
+    <h3 class="text-center">Listado de cuentas de ahorro</h3>
+    <div class="text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalaltacuenta">Alta cuenta de ahorro</button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalaltacuenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Dar de alta una cuenta de ahorro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="text-center" style="color: #757575;" [formGroup]="formcuentas" (ngSubmit)="guardarcuentahorro()" autocomplete="off">
+                    <div class="modal-body">
+                        <div class="md-form">
+                            <input type="text" class="form-control" maxlength="40" formControlName="numeroCuenta">
+                            <label>Numero de cuenta</label>
+                            <small *ngIf="isSubmitted && errorControl.numeroCuenta.errors?.required" class=" text-danger ">El numero de cuenta es requerido</small>
+                        </div>
+                        <div class="md-form ">
+                            <input type="text" class="form-control" maxlength="20" formControlName="saldo">
+                            <label>Saldo</label>
+                            <small class=" text-danger" *ngIf="isSubmitted && errorControl.saldo.errors?.required">El saldo es requerido
+                            </small>
+                        </div>
+                        <div class="md-form ">
+                            <select class="browser-default custom-select" formControlName="idCliente">
+                                <option value="" disabled selected>Elige el cliente</option>
+                                <option *ngFor="let cliente of listaclientes" value="{{cliente.idcliente}}">{{cliente.nombrecompleto}}</option>
+                              </select>
+                            <small class=" text-danger" *ngIf="isSubmitted && errorControl.idCliente.errors?.required">El cliente es requerido
+                            </small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Numero de cuenta</th>
+                <th scope="col">Saldo</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Ultima Actualización</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let datoscuenta of datoscuentas; let i= index ">
+                <th scope="row ">{{i+1}}</th>
+                <td>{{datoscuenta.numeroCuenta}}</td>
+                <td>{{datoscuenta.saldo}}</td>
+                <td>{{datoscuenta.estado}}</td>
+                <td>{{datoscuenta.fechaUltimaAct}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

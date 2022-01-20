@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark  indigo">
+    <a class="navbar-brand" href="#">Practica</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Login
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container main-container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="card">
+                <h5 class="card-header info-color white-text text-center py-4">
+                    <strong>Login</strong>
+                </h5>
+                <div class="card-body px-lg-5 pt-0">
+                    <form class="text-center" style="color: #757575;" [formGroup]="formlogin" (ngSubmit)="loginvalidate()" autocomplete="off">
+                        <div class="md-form">
+                            <input type="email" class="form-control" maxlength="40" formControlName="email">
+                            <label>Correo</label>
+                            <small *ngIf="isSubmitted && errorControl.email.errors?.required" class=" text-danger ">El correo es requerido</small>
+                            <small *ngIf="isSubmitted && errorControl.email.errors?.pattern" class=" text-danger ">El correo no es valido</small>
+                        </div>
+                        <div class="md-form ">
+                            <input type="password" class="form-control" maxlength="20" formControlName="password">
+                            <label>Password</label>
+                            <small class=" text-danger" *ngIf="isSubmitted && errorControl.password.errors?.required">La contraseña es requerida
+                        </small>
+                            <small class=" text-danger" *ngIf="isSubmitted && errorControl.password.errors?.minlength">Por favor, no escribas menos de 8 caracteres.</small>
+                        </div>
+                        <small class=" text-danger" *ngIf="errorlogin">{{mensajeerror}}</small>
+                        <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0 " type="submit ">Iniciar Sesión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 "></div>
+    </div>
+</div>
